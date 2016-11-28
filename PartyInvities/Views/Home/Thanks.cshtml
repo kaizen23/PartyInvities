@@ -1,0 +1,43 @@
+﻿@model PartyInvities.Models.GuestResponse
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dziękujemy</title>
+</head>
+<body>
+    @{ 
+        try
+        {
+            WebMail.SmtpServer = "smtp.przyklad.pl";
+            WebMail.SmtpPort = 587;
+            WebMail.EnableSsl = true;
+            WebMail.UserName = "nazwa uzytkownika";
+            WebMail.Password = "haslo";
+            WebMail.From = "poczta@pl";
+        } catch (Exception)
+        {
+            @: <b> Przepraszamy nie możemy wysłać wiadomości</b>
+        }
+
+    }
+    <div> 
+        <h1>Dziękujemy @Model.Name! </h1>
+        @if (Model.WillAttend == true)
+        {
+            @: <p>Cieszymy, że się zjawicie</p>
+        }
+        else
+        {
+            @:<p>Przykro nam, że was nie będzie</p>
+        }
+
+    </div>
+</body>
+</html>
